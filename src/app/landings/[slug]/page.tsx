@@ -1,19 +1,17 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { getAllClientSlugs, getLandingConfig } from "@/lib/loader";
+import { getLandingConfig } from "@/lib/loader";
 import { BabyShowerBohoTemplate } from "@/components/templates/BabyShowerBohoTemplate";
+
+// Força a renderização dinâmica no servidor (SSR) a cada requisição
+// Garante que atualizações no Vercel Edge Config reflitam em tempo real (< 5ms) sem necessidade de redeploy
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 interface PageProps {
   params: Promise<{
     slug: string;
   }>;
-}
-
-export function generateStaticParams() {
-  const slugs = getAllClientSlugs();
-  return slugs.map((slug) => ({
-    slug,
-  }));
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {

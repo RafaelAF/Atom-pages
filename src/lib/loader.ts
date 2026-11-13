@@ -14,7 +14,7 @@ export function sanitizePhoneNumber(phone: string): string {
 }
 
 /**
- * Retorna todos os slugs válidos de clientes para SSG (Static Site Generation),
+ * Retorna todos os slugs válidos de clientes para geração de links e fallbacks,
  * ignorando arquivos de modelo (iniciados com _)
  */
 export function getAllClientSlugs(): string[] {
@@ -30,13 +30,13 @@ export function getAllClientSlugs(): string[] {
 
     return slugs.length > 0 ? slugs : ["stela"];
   } catch (err) {
-    console.warn("[loader] Erro ao listar slugs dos clientes, usando fallback:", err);
+    console.warn("[loader] Erro ao listar slugs dos clientes locais, usando fallback padrão:", err);
     return ["stela"];
   }
 }
 
 /**
- * Fusão profunda simples para aplicar sobrescritas parciais
+ * Fusão profunda para aplicar sobrescritas parciais
  */
 function deepMerge<T extends Record<string, any>>(target: T, source: Partial<T>): T {
   const output = { ...target };
@@ -77,10 +77,11 @@ export function getClientConfig(slug: string): LandingConfig | null {
     }
 
     if (!config) {
+      console.warn(`[loader] Arquivo local não encontrado para o slug "${slug}".`);
       return null;
     }
 
-    // Sobrescrita em tempo de build via Vercel Environment Variables
+    // Sobrescrita em tempo de build/execução via Environment Variables
     const envKey = `LANDING_OVERRIDE_${slug.replace(/[^a-zA-Z0-9]/g, "_").toUpperCase()}`;
     const envOverride = process.env[envKey];
 
@@ -93,7 +94,7 @@ export function getClientConfig(slug: string): LandingConfig | null {
       }
     }
 
-    // Sanitização de telefone (Regra de Negócio: apenas dígitos para wa.me)
+    // Sanitização de telefone (apenas dígitos numéricos para o protocolo wa.me)
     if (config.rsvp?.whatsappNumber) {
       config.rsvp.whatsappNumber = sanitizePhoneNumber(config.rsvp.whatsappNumber);
     }
@@ -103,33 +104,57 @@ export function getClientConfig(slug: string): LandingConfig | null {
     if (slug === "stela") {
       return stelaLocal as LandingConfig;
     }
-    console.error(`[loader] Erro ao carregar configuração para o slug "${slug}":`, error);
+    console.error(`[loader] Erro inesperado ao carregar arquivo local para o slug "${slug}":`, error);
     return null;
   }
 }
 
 /**
- * Carrega a configuração do cliente de forma assíncrona:
- * 1. Tenta buscar no Edge Config da Vercel (se configurado)
- * 2. Fallback para os arquivos JSON locais
+ * Carrega a configuração do cliente de forma prioritária e assíncrona:
+ * 1. Consulta o Vercel Edge Config (se `process.env.EDGE_CONFIG` estiver presente)
+ *    - Suporta chave agrupada: `landings[slug]` (ex: { "landings": { "stela": { ... } } })
+ *    - Suporta chave direta na raiz: `[slug]` (ex: { "stela": { ... } })
+ * 2. Fallback seguro e resiliente para os arquivos JSON locais em `src/config/clients/[slug].json`
  */
 export async function getLandingConfig(slug: string): Promise<LandingConfig | null> {
-  // 1. Tenta buscar dinamicamente no Edge Config da Vercel
   if (process.env.EDGE_CONFIG) {
     try {
-      const landings = await get<Record<string, LandingConfig>>("landings");
-      if (landings && landings[slug]) {
-        const config = landings[slug];
+      // 1. Tenta buscar na estrutura agrupada 'landings'
+      const landingsGroup = await get<Record<string, LandingConfig>>("landings");
+      if (landingsGroup && typeof landingsGroup === "object" && landingsGroup[slug]) {
+        console.info(`[loader] Configuração para "${slug}" obtida via Edge Config (chave agrupada "landings").`);
+        const config = landingsGroup[slug];
         if (config.rsvp?.whatsappNumber) {
           config.rsvp.whatsappNumber = sanitizePhoneNumber(config.rsvp.whatsappNumber);
         }
         return config;
       }
+
+      // 2. Tenta buscar pela chave direta na raiz do Edge Config
+      const directConfig = await get<LandingConfig>(slug);
+      if (directConfig && typeof directConfig === "object" && (directConfig.slug || directConfig.templateId)) {
+        console.info(`[loader] Configuração para "${slug}" obtida via Edge Config (chave direta raiz).`);
+        if (directConfig.rsvp?.whatsappNumber) {
+          directConfig.rsvp.whatsappNumber = sanitizePhoneNumber(directConfig.rsvp.whatsappNumber);
+        }
+        return directConfig;
+      }
+
+      console.warn(`[loader] Slug "${slug}" não localizado no Edge Config (verificado em "landings" e na raiz). Acionando fallback local.`);
     } catch (error) {
-      console.warn("[loader] Edge Config indisponível ou falhou, usando fallback local:", error);
+      console.error(`[loader] Erro ao consultar o Vercel Edge Config para "${slug}":`, error);
     }
+  } else {
+    console.warn(`[loader] Variável EDGE_CONFIG não configurada no ambiente. Usando fallback local para "${slug}".`);
   }
 
-  // 2. Fallback local síncrono
-  return getClientConfig(slug);
+  // Fallback local seguro
+  const localConfig = getClientConfig(slug);
+  if (localConfig) {
+    console.info(`[loader] Configuração para "${slug}" carregada com sucesso do fallback local.`);
+    return localConfig;
+  }
+
+  console.error(`[loader] Falha ao carregar configuração para "${slug}": não encontrado nem no Edge Config nem no fallback local.`);
+  return null;
 }
