@@ -1,6 +1,6 @@
 import fs from "fs";
 import path from "path";
-import { get } from "@vercel/edge-config";
+import { get } from "@vercel/global-config";
 import { LandingConfig } from "@/types/landing";
 import stelaLocal from "@/config/clients/stela.json";
 
@@ -111,18 +111,25 @@ export function getClientConfig(slug: string): LandingConfig | null {
 
 /**
  * Carrega a configuração do cliente de forma prioritária e assíncrona:
- * 1. Consulta o Vercel Edge Config (se `process.env.EDGE_CONFIG` estiver presente)
+ * 1. Consulta o Vercel Global Config (usando `@vercel/global-config` via `process.env.GLOBAL_CONFIG` ou fallback `EDGE_CONFIG`)
  *    - Suporta chave agrupada: `landings[slug]` (ex: { "landings": { "stela": { ... } } })
  *    - Suporta chave direta na raiz: `[slug]` (ex: { "stela": { ... } })
  * 2. Fallback seguro e resiliente para os arquivos JSON locais em `src/config/clients/[slug].json`
  */
 export async function getLandingConfig(slug: string): Promise<LandingConfig | null> {
-  if (process.env.EDGE_CONFIG) {
+  const hasConfigEnv = !!(process.env.GLOBAL_CONFIG || process.env.EDGE_CONFIG);
+
+  if (hasConfigEnv) {
     try {
+      // Garante suporte tanto se a variável for GLOBAL_CONFIG quanto EDGE_CONFIG
+      if (!process.env.GLOBAL_CONFIG && process.env.EDGE_CONFIG) {
+        process.env.GLOBAL_CONFIG = process.env.EDGE_CONFIG;
+      }
+
       // 1. Tenta buscar na estrutura agrupada 'landings'
       const landingsGroup = await get<Record<string, LandingConfig>>("landings");
       if (landingsGroup && typeof landingsGroup === "object" && landingsGroup[slug]) {
-        console.info(`[loader] Configuração para "${slug}" obtida via Edge Config (chave agrupada "landings").`);
+        console.info(`[loader] Configuração para "${slug}" obtida via Global Config (chave agrupada "landings").`);
         const config = landingsGroup[slug];
         if (config.rsvp?.whatsappNumber) {
           config.rsvp.whatsappNumber = sanitizePhoneNumber(config.rsvp.whatsappNumber);
@@ -130,22 +137,22 @@ export async function getLandingConfig(slug: string): Promise<LandingConfig | nu
         return config;
       }
 
-      // 2. Tenta buscar pela chave direta na raiz do Edge Config
+      // 2. Tenta buscar pela chave direta na raiz do Global Config
       const directConfig = await get<LandingConfig>(slug);
       if (directConfig && typeof directConfig === "object" && (directConfig.slug || directConfig.templateId)) {
-        console.info(`[loader] Configuração para "${slug}" obtida via Edge Config (chave direta raiz).`);
+        console.info(`[loader] Configuração para "${slug}" obtida via Global Config (chave direta raiz).`);
         if (directConfig.rsvp?.whatsappNumber) {
           directConfig.rsvp.whatsappNumber = sanitizePhoneNumber(directConfig.rsvp.whatsappNumber);
         }
         return directConfig;
       }
 
-      console.warn(`[loader] Slug "${slug}" não localizado no Edge Config (verificado em "landings" e na raiz). Acionando fallback local.`);
+      console.warn(`[loader] Slug "${slug}" não localizado no Global Config (verificado em "landings" e na raiz). Acionando fallback local.`);
     } catch (error) {
-      console.error(`[loader] Erro ao consultar o Vercel Edge Config para "${slug}":`, error);
+      console.error(`[loader] Erro ao consultar o Vercel Global Config para "${slug}":`, error);
     }
   } else {
-    console.warn(`[loader] Variável EDGE_CONFIG não configurada no ambiente. Usando fallback local para "${slug}".`);
+    console.warn(`[loader] GLOBAL_CONFIG não configurado no ambiente. Usando fallback local para "${slug}".`);
   }
 
   // Fallback local seguro
@@ -155,6 +162,6 @@ export async function getLandingConfig(slug: string): Promise<LandingConfig | nu
     return localConfig;
   }
 
-  console.error(`[loader] Falha ao carregar configuração para "${slug}": não encontrado nem no Edge Config nem no fallback local.`);
+  console.error(`[loader] Falha ao carregar configuração para "${slug}": não encontrado nem no Global Config nem no fallback local.`);
   return null;
 }
