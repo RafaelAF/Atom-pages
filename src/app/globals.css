@@ -1,0 +1,60 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-primary: #D89B9E;
+  --color-primary-dark: #C48185;
+  --color-bg: #FAF6F0;
+  --color-surface: #F3E8DC;
+  --color-text: #5C3A31;
+  --color-accent: #7C7859;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans), sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Fundo pontilhado artesanal configurável */
+.pattern-dots {
+  background-image: radial-gradient(var(--color-primary) 0.5px, transparent 0.5px);
+  background-size: 24px 24px;
+  background-position: 0 0;
+}
+
+/* Efeito de costura artesanal (Stitched Cards & Badges) */
+.stitched-card {
+  position: relative;
+  background-color: var(--color-surface);
+  border-radius: 1.5rem;
+  box-shadow: 0 10px 25px -5px rgba(92, 58, 49, 0.08);
+}
+
+.stitched-card::after {
+  content: '';
+  position: absolute;
+  inset: 8px;
+  border: 2px dashed var(--color-primary);
+  border-radius: 1.1rem;
+  pointer-events: none;
+}
+
+.stitched-badge {
+  position: relative;
+  background-color: var(--color-surface);
+  box-shadow: 0 12px 30px rgba(92, 58, 49, 0.1);
+}
+
+.stitched-badge::after {
+  content: '';
+  position: absolute;
+  inset: 10px;
+  border: 2px dashed var(--color-primary);
+  border-radius: 9999px;
+  pointer-events: none;
+}
+

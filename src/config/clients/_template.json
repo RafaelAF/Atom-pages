@@ -1,0 +1,110 @@
+{
+  "slug": "novo-cliente",
+  "templateId": "baby-shower-boho",
+  "seo": {
+    "title": "Chá de Bebê - [Nome] ♥",
+    "description": "Você é nosso convidado especial para celebrar este momento!"
+  },
+  "theme": {
+    "colors": {
+      "primary": "#D89B9E",
+      "primaryDark": "#C48185",
+      "bg": "#FAF6F0",
+      "surface": "#F3E8DC",
+      "text": "#5C3A31",
+      "accent": "#7C7859"
+    },
+    "pattern": "dots"
+  },
+  "hero": {
+    "tagline": "Estamos esperando por você",
+    "badgeSubtitle": "Chá de Bebê",
+    "title": "[Nome]",
+    "badgeFooter": "com muito amor",
+    "countdownTarget": "2026-12-31T15:00:00",
+    "countdownLabel": "Contagem regressiva para o grande dia",
+    "quickLinks": {
+      "rsvpLabel": "Confirmar Presença",
+      "giftsLabel": "Lista & PIX"
+    }
+  },
+  "story": {
+    "subtitle": "Nossa Doce Espera",
+    "title": "Um pedacinho do céu está chegando",
+    "paragraphs": [
+      "Cada batida de coração enche nossa casa de amor e expectativa.",
+      "Sua presença tornará esse momento ainda mais especial e inesquecível!"
+    ],
+    "signature": "Com amor, Família ♥"
+  },
+  "event": {
+    "subtitle": "Programe-se",
+    "title": "Onde e Quando",
+    "dateDisplay": "Sábado, 31 de Dezembro",
+    "timeDisplay": "Das 15h00 às 19h00",
+    "dressCode": "Casual Confortável",
+    "locationName": "Nome do Local",
+    "address": "Endereço Completo, 123 — Bairro\nCidade - UF",
+    "googleMapsUrl": "https://maps.google.com/?q=Local",
+    "wazeUrl": "https://waze.com/ul?q=Local"
+  },
+  "gifts": {
+    "subtitle": "Sugestões de Presentes",
+    "title": "Sugestões & PIX",
+    "description": "Sua presença é o nosso maior presente! Se desejar nos presentear, preparamos algumas opções:",
+    "diaperGuide": {
+      "title": "Guia de Fraldas & Cuidados",
+      "items": [
+        {
+          "size": "P",
+          "quantity": "1 Pacote de Fraldas",
+          "extra": "+ Lenço umedecido",
+          "isHighlight": false
+        },
+        {
+          "size": "M",
+          "quantity": "1 Pacote de Fraldas",
+          "extra": "+ Pomada",
+          "isHighlight": true
+        },
+        {
+          "size": "G",
+          "quantity": "1 Pacote de Fraldas",
+          "extra": "+ Sabonete neutro",
+          "isHighlight": false
+        }
+      ],
+      "brandsNote": "* Sugestões de marcas: Pampers, Huggies ou Granado."
+    },
+    "pix": {
+      "title": "Operação Fralda via PIX",
+      "description": "Prefere presentear com qualquer valor? Escaneie ou copie a chave:",
+      "key": "seu-pix@exemplo.com.br",
+      "keyType": "email"
+    },
+    "externalLists": [
+      {
+        "name": "🎁 Lista na Loja Online",
+        "url": "https://www.amazon.com.br"
+      }
+    ]
+  },
+  "rsvp": {
+    "subtitle": "RSVP",
+    "title": "Confirme sua Presença",
+    "description": "Preencha para enviar a confirmação no WhatsApp!",
+    "whatsappNumber": "5511999999999",
+    "companionOptions": [
+      "Vou sozinho(a)",
+      "+ 1 acompanhante",
+      "+ 2 acompanhantes",
+      "+ 3 acompanhantes"
+    ],
+    "defaultMessagePrefix": "Olá! Gostaria de confirmar minha presença! 🎉"
+  },
+  "footer": {
+    "title": "Chá de Bebê",
+    "subtitle": "Feito com carinho para celebrar esse dia especial ♥"
+  }
+}
+

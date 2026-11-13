@@ -1,0 +1,114 @@
+{
+  "slug": "stela",
+  "templateId": "baby-shower-boho",
+  "seo": {
+    "title": "Chá de Bebê da Stela ♥",
+    "description": "Você é nosso convidado especial para celebrar a doce espera da Stela!"
+  },
+  "theme": {
+    "colors": {
+      "primary": "#D89B9E",
+      "primaryDark": "#C48185",
+      "bg": "#FAF6F0",
+      "surface": "#F3E8DC",
+      "text": "#5C3A31",
+      "accent": "#7C7859"
+    },
+    "pattern": "dots"
+  },
+  "hero": {
+    "tagline": "Estamos esperando por você",
+    "badgeSubtitle": "Chá de Bebê",
+    "title": "Stela",
+    "badgeFooter": "com muito amor",
+    "countdownTarget": "2026-12-12T15:00:00",
+    "countdownLabel": "Contagem regressiva para o grande dia",
+    "quickLinks": {
+      "rsvpLabel": "Confirmar Presença",
+      "giftsLabel": "Lista & PIX"
+    }
+  },
+  "story": {
+    "subtitle": "Nossa Doce Espera",
+    "title": "Um pedacinho do céu está chegando",
+    "paragraphs": [
+      "Cada batida do coração da Stela já enche a nossa casa de luz, ternura e sonhos. Antes mesmo de conhecermos o seu rostinho, ela já é cercada por pessoas incríveis como você.",
+      "Preparamos uma tarde cheia de carinho, abraços apertados e memórias doces para celebrar a chegada da nossa menina. Sua presença tornará esse momento inesquecível!"
+    ],
+    "signature": "Com amor, Mamãe Vic & Papai ♥"
+  },
+  "event": {
+    "subtitle": "Programe-se",
+    "title": "Onde e Quando",
+    "dateDisplay": "Sábado, 12 de Dezembro",
+    "timeDisplay": "Das 15h00 às 19h00",
+    "dressCode": "Casual Confortável (Tons claros ou pastéis combinam com o tema!)",
+    "locationName": "Espaço Jardim Encantado",
+    "address": "Rua das Flores, 450 — Jardim Botânico\nSão Paulo - SP",
+    "googleMapsUrl": "https://maps.google.com/?q=Jardim+Botanico+Sao+Paulo",
+    "wazeUrl": "https://waze.com/ul?q=Jardim+Botanico+Sao+Paulo"
+  },
+  "gifts": {
+    "subtitle": "Mimos para a Stela",
+    "title": "Sugestões & PIX",
+    "description": "Sua presença é o nosso maior presente! Mas, se desejar mimar a Stela, preparamos algumas sugestões práticas:",
+    "diaperGuide": {
+      "title": "Guia de Fraldas & Cuidados",
+      "items": [
+        {
+          "size": "P",
+          "quantity": "1 Pacote de Fraldas",
+          "extra": "+ Lenço umedecido sem fragrância",
+          "isHighlight": false
+        },
+        {
+          "size": "M",
+          "quantity": "1 Pacote de Fraldas",
+          "extra": "+ Pomada para assaduras",
+          "isHighlight": true
+        },
+        {
+          "size": "G",
+          "quantity": "1 Pacote de Fraldas",
+          "extra": "+ Sabonete líquido neutro",
+          "isHighlight": false
+        }
+      ],
+      "brandsNote": "* Sugestão de marcas que costumamos gostar: Pampers Confort Sec, Huggies Supreme Care ou Granado."
+    },
+    "pix": {
+      "title": "Operação Fralda via PIX",
+      "description": "Prefere contribuir com qualquer valor para o enxoval? Escaneie o QR Code ou copie a chave abaixo:",
+      "key": "chabebe.stela@exemplo.com.br",
+      "keyType": "email"
+    },
+    "externalLists": [
+      {
+        "name": "🎁 Lista na Amazon Baby",
+        "url": "https://www.amazon.com.br/baby-reg"
+      },
+      {
+        "name": "🧸 Lista no Magalu",
+        "url": "https://www.magazineluiza.com.br"
+      }
+    ]
+  },
+  "rsvp": {
+    "subtitle": "RSVP",
+    "title": "Confirme sua Presença",
+    "description": "Preencha os dados abaixo para enviar sua confirmação diretamente no WhatsApp da mamãe!",
+    "whatsappNumber": "5511999999999",
+    "companionOptions": [
+      "Vou sozinho(a)",
+      "+ 1 acompanhante",
+      "+ 2 acompanhantes",
+      "+ 3 acompanhantes",
+      "+ 4 acompanhantes"
+    ],
+    "defaultMessagePrefix": "Olá! Gostaria de confirmar minha presença no *Chá de Bebê da Stela*! 🧸🎀"
+  },
+  "footer": {
+    "title": "Chá de Bebê da Stela",
+    "subtitle": "Feito com muito amor para celebrar a nossa princesa ♥"
+  }
+}

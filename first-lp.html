@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chá de Bebê da Stela ♥</title>
+
+    <!-- Google Fonts: Playfair Display (Serifada), Great Vibes (Cursiva), Poppins (Corpo) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Poppins:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        bgOffWhite: '#FAF6F0',
+                        warmSand: '#F3E8DC',
+                        dustyRose: '#D89B9E',
+                        dustyRoseDark: '#C48185',
+                        coffeeBrown: '#5C3A31',
+                        oliveGreen: '#7C7859',
+                    },
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        script: ['"Great Vibes"', 'cursive'],
+                        sans: ['"Poppins"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Estilos artesanais e efeitos de costura */
+        body {
+            background-color: #FAF6F0;
+            color: #5C3A31;
+            font-family: 'Poppins', sans-serif;
+            background-image: radial-gradient(#D89B9E 0.5px, transparent 0.5px);
+            background-size: 24px 24px;
+            background-position: 0 0;
+        }
+
+        .stitched-card {
+            position: relative;
+            background-color: #F3E8DC;
+            border-radius: 1.5rem;
+            box-shadow: 0 10px 25px -5px rgba(92, 58, 49, 0.08);
+        }
+
+        .stitched-card::after {
+            content: '';
+            position: absolute;
+            inset: 8px;
+            border: 2px dashed #D89B9E;
+            border-radius: 1.1rem;
+            pointer-events: none;
+        }
+
+        .stitched-badge {
+            position: relative;
+            background-color: #F3E8DC;
+            box-shadow: 0 12px 30px rgba(92, 58, 49, 0.1);
+        }
+
+        .stitched-badge::after {
+            content: '';
+            position: absolute;
+            inset: 10px;
+            border: 2px dashed #D89B9E;
+            border-radius: 9999px;
+            pointer-events: none;
+        }
+
+        @keyframes floatSlow {
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-6px);
+            }
+        }
+
+        .animate-float {
+            animation: floatSlow 4s ease-in-out infinite;
+        }
+    </style>
+</head>
+
+<body class="antialiased selection:bg-dustyRose selection:text-white">
+
+    <!-- Navbar Fixa -->
+    <header class="sticky top-0 z-40 bg-bgOffWhite/90 backdrop-blur-md border-b border-dustyRose/20">
+        <nav class="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between">
+            <a href="#inicio" class="font-script text-3xl text-coffeeBrown hover:text-dustyRose transition-colors">
+                Stela ♥
+            </a>
+            <div class="flex items-center space-x-3 sm:space-x-6 text-xs sm:text-sm font-medium text-coffeeBrown">
+                <a href="#historia" class="hover:text-dustyRose transition-colors py-1">A História</a>
+                <a href="#evento" class="hover:text-dustyRose transition-colors py-1">O Evento</a>
+                <a href="#presentes" class="hover:text-dustyRose transition-colors py-1">Presentes & PIX</a>
+                <a href="#rsvp"
+                    class="bg-dustyRose text-white px-3.5 py-2 rounded-full shadow-sm hover:bg-dustyRoseDark transition-all">
+                    Confirmar
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- 1. HERO SECTION -->
+    <section id="inicio" class="pt-10 pb-16 px-4 text-center overflow-hidden">
+        <div class="max-w-2xl mx-auto flex flex-col items-center">
+
+            <!-- Estrelinhas decorativas superiores -->
+            <div class="flex items-center gap-3 text-dustyRose mb-4 animate-float">
+                <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                    <path d="M12 2l2.4 7.4h7.6l-6 4.6 2.3 7-6.3-4.6-6.3 4.6 2.3-7-6-4.6h7.6z" />
+                </svg>
+                <span class="text-xs uppercase tracking-[0.25em] font-semibold text-oliveGreen">Estamos esperando por
+                    você</span>
+                <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                    <path d="M12 2l2.4 7.4h7.6l-6 4.6 2.3 7-6.3-4.6-6.3 4.6 2.3-7-6-4.6h7.6z" />
+                </svg>
+            </div>
+
+            <!-- Medalhão Central Inspirado na Arte -->
+            <div
+                class="stitched-badge w-72 h-72 sm:w-80 sm:h-80 rounded-full flex flex-col items-center justify-center p-6 mb-8">
+
+                <!-- Laço Rosa no Topo do Medalhão -->
+                <div class="absolute -top-5 left-1/2 -translate-x-1/2 z-10">
+                    <svg class="w-16 h-10 drop-shadow-sm" viewBox="0 0 100 60" fill="none">
+                        <path d="M48 30C35 12 10 10 12 30C14 50 35 45 48 30Z" fill="#D89B9E" stroke="#C48185"
+                            stroke-width="2" />
+                        <path d="M52 30C65 12 90 10 88 30C86 50 65 45 52 30Z" fill="#D89B9E" stroke="#C48185"
+                            stroke-width="2" />
+                        <path d="M44 34L32 54L42 50L48 36" fill="#C48185" />
+                        <path d="M56 34L68 54L58 50L52 36" fill="#C48185" />
+                        <rect x="44" y="23" width="12" height="14" rx="5" fill="#C48185" />
+                    </svg>
+                </div>
+
+                <!-- Ursinho Fofo Minimalista -->
+                <svg class="w-14 h-14 mb-1 text-coffeeBrown" viewBox="0 0 64 64" fill="none">
+                    <circle cx="18" cy="18" r="8" fill="#D5B295" stroke="#5C3A31" stroke-width="2" />
+                    <circle cx="46" cy="18" r="8" fill="#D5B295" stroke="#5C3A31" stroke-width="2" />
+                    <circle cx="32" cy="34" r="18" fill="#E2C3A8" stroke="#5C3A31" stroke-width="2" />
+                    <ellipse cx="32" cy="39" rx="7" ry="5.5" fill="#FAF6F0" />
+                    <circle cx="26" cy="30" r="2" fill="#5C3A31" />
+                    <circle cx="38" cy="30" r="2" fill="#5C3A31" />
+                    <ellipse cx="32" cy="37" rx="2.5" ry="1.8" fill="#5C3A31" />
+                    <path d="M29 41Q32 43.5 35 41" stroke="#5C3A31" stroke-width="1.8" stroke-linecap="round" />
+                    <!-- Lacinho do urso -->
+                    <path d="M32 52L25 48V56L32 52ZM32 52L39 48V56L32 52Z" fill="#D89B9E" />
+                </svg>
+
+                <h2 class="font-serif text-xl sm:text-2xl font-bold text-coffeeBrown tracking-wide">
+                    Chá de Bebê
+                </h2>
+
+                <!-- Nome com raminhos botânicos nas laterais -->
+                <div class="flex items-center justify-center gap-2 my-1">
+                    <!-- Raminho Esquerdo -->
+                    <svg class="w-7 h-7 text-oliveGreen" viewBox="0 0 32 32" fill="none">
+                        <path d="M26 26C18 20 12 14 6 6" stroke="currentColor" stroke-width="1.5"
+                            stroke-linecap="round" />
+                        <ellipse cx="11" cy="14" rx="4" ry="2" transform="rotate(-30 11 14)" fill="currentColor" />
+                        <ellipse cx="17" cy="20" rx="4" ry="2" transform="rotate(-30 17 20)" fill="currentColor" />
+                        <ellipse cx="15" cy="9" rx="4" ry="2" transform="rotate(45 15 9)" fill="currentColor" />
+                        <ellipse cx="21" cy="15" rx="4" ry="2" transform="rotate(45 21 15)" fill="currentColor" />
+                    </svg>
+
+                    <h1 class="font-script text-6xl sm:text-7xl text-dustyRoseDark leading-none pt-2">
+                        Stela
+                    </h1>
+
+                    <!-- Raminho Direito -->
+                    <svg class="w-7 h-7 text-oliveGreen scale-x-[-1]" viewBox="0 0 32 32" fill="none">
+                        <path d="M26 26C18 20 12 14 6 6" stroke="currentColor" stroke-width="1.5"
+                            stroke-linecap="round" />
+                        <ellipse cx="11" cy="14" rx="4" ry="2" transform="rotate(-30 11 14)" fill="currentColor" />
+                        <ellipse cx="17" cy="20" rx="4" ry="2" transform="rotate(-30 17 20)" fill="currentColor" />
+                        <ellipse cx="15" cy="9" rx="4" ry="2" transform="rotate(45 15 9)" fill="currentColor" />
+                        <ellipse cx="21" cy="15" rx="4" ry="2" transform="rotate(45 21 15)" fill="currentColor" />
+                    </svg>
+                </div>
+
+                <p class="text-xs sm:text-sm font-medium text-coffeeBrown/90 tracking-wider mt-1">
+                    <span class="text-dustyRose">♥</span> com muito amor <span class="text-dustyRose">♥</span>
+                </p>
+            </div>
+
+            <!-- Contagem Regressiva (Countdown) -->
+            <div class="w-full max-w-md mb-8">
+                <p class="text-xs uppercase tracking-widest text-oliveGreen font-semibold mb-3">Contagem regressiva para
+                    o grande dia</p>
+                <div class="grid grid-cols-4 gap-2 sm:gap-3">
+                    <div class="bg-warmSand border border-dustyRose/40 rounded-2xl p-3 shadow-sm">
+                        <span id="cd-days"
+                            class="block font-serif text-2xl sm:text-3xl font-bold text-coffeeBrown">00</span>
+                        <span class="text-[11px] uppercase tracking-wider text-coffeeBrown/70">Dias</span>
+                    </div>
+                    <div class="bg-warmSand border border-dustyRose/40 rounded-2xl p-3 shadow-sm">
+                        <span id="cd-hours"
+                            class="block font-serif text-2xl sm:text-3xl font-bold text-coffeeBrown">00</span>
+                        <span class="text-[11px] uppercase tracking-wider text-coffeeBrown/70">Horas</span>
+                    </div>
+                    <div class="bg-warmSand border border-dustyRose/40 rounded-2xl p-3 shadow-sm">
+                        <span id="cd-minutes"
+                            class="block font-serif text-2xl sm:text-3xl font-bold text-coffeeBrown">00</span>
+                        <span class="text-[11px] uppercase tracking-wider text-coffeeBrown/70">Min</span>
+                    </div>
+                    <div class="bg-warmSand border border-dustyRose/40 rounded-2xl p-3 shadow-sm">
+                        <span id="cd-seconds"
+                            class="block font-serif text-2xl sm:text-3xl font-bold text-dustyRoseDark">00</span>
+                        <span class="text-[11px] uppercase tracking-wider text-coffeeBrown/70">Seg</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Botões de Ação Rápida -->
+            <div class="flex flex-col sm:flex-row gap-3 w-full max-w-md justify-center">
+                <a href="#rsvp"
+                    class="flex-1 bg-dustyRose hover:bg-dustyRoseDark text-white font-medium py-3.5 px-6 rounded-full shadow-md transition-all flex items-center justify-center gap-2">
+                    <span>Confirmar Presença</span>
+                    <span>♥</span>
+                </a>
+                <a href="#presentes"
+                    class="flex-1 bg-warmSand hover:bg-dustyRose/20 text-coffeeBrown border border-dustyRose font-medium py-3.5 px-6 rounded-full transition-all flex items-center justify-center gap-2">
+                    <span>Lista & PIX</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Divisor Botânico -->
+    <div class="flex items-center justify-center gap-3 my-2 text-dustyRose/60">
+        <span class="h-px w-16 bg-dustyRose/40"></span>
+        <span>♥</span>
+        <span class="h-px w-16 bg-dustyRose/40"></span>
+    </div>
+
+    <!-- 2. A HISTÓRIA / MENSAGEM DOS PAIS -->
+    <section id="historia" class="py-12 px-4">
+        <div class="max-w-2xl mx-auto stitched-card p-8 sm:p-10 text-center">
+            <span class="inline-block text-xs uppercase tracking-[0.2em] text-oliveGreen font-semibold mb-2">Nossa Doce
+                Espera</span>
+            <h2 class="font-serif text-2xl sm:text-3xl font-bold text-coffeeBrown mb-4">
+                Um pedacinho do céu está chegando
+            </h2>
+            <p class="text-sm sm:text-base leading-relaxed text-coffeeBrown/90 mb-4">
+                Cada batida do coração da <strong>Stela</strong> já enche a nossa casa de luz, ternura e sonhos. Antes
+                mesmo de conhecermos o seu rostinho, ela já é cercada por pessoas incríveis como você.
+            </p>
+            <p class="text-sm sm:text-base leading-relaxed text-coffeeBrown/90">
+                Preparamos uma tarde cheia de carinho, abraços apertados e memórias doces para celebrar a chegada da
+                nossa menina. Sua presença tornará esse momento inesquecível!
+            </p>
+            <div class="mt-6 font-script text-3xl text-dustyRoseDark">
+                Com amor, Mamãe Vic & Papai ♥
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. INFORMAÇÕES DO EVENTO (ONDE E QUANDO) -->
+    <section id="evento" class="py-12 px-4">
+        <div class="max-w-3xl mx-auto">
+            <div class="text-center mb-8">
+                <span class="text-xs uppercase tracking-[0.2em] text-oliveGreen font-semibold">Programe-se</span>
+                <h2 class="font-serif text-3xl font-bold text-coffeeBrown mt-1">Onde e Quando</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Card Data e Hora -->
+                <div class="stitched-card p-7 flex flex-col items-center text-center justify-between">
+                    <div>
+                        <div
+                            class="w-12 h-12 rounded-full bg-bgOffWhite border border-dustyRose/40 flex items-center justify-center mx-auto mb-4 text-dustyRoseDark">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                                <line x1="16" y1="2" x2="16" y2="6" />
+                                <line x1="8" y1="2" x2="8" y2="6" />
+                                <line x1="3" y1="10" x2="21" y2="10" />
+                            </svg>
+                        </div>
+                        <h3 class="font-serif text-xl font-bold text-coffeeBrown mb-1">Data & Horário</h3>
+                        <p id="event-date-display" class="text-base font-semibold text-dustyRoseDark mb-1">Sábado, 12 de
+                            Dezembro</p>
+                        <p class="text-sm text-coffeeBrown/80 mb-4">Das 15h00 às 19h00</p>
+                    </div>
+                    <div class="w-full pt-3 border-t border-dustyRose/30">
+                        <span class="text-xs font-medium text-oliveGreen uppercase tracking-wider">Traje
+                            Sugerido:</span>
+                        <p class="text-xs text-coffeeBrown/80 mt-0.5">Casual Confortável (Tons claros ou pastéis
+                            combinam com o tema!)</p>
+                    </div>
+                </div>
+
+                <!-- Card Localização -->
+                <div class="stitched-card p-7 flex flex-col items-center text-center justify-between">
+                    <div>
+                        <div
+                            class="w-12 h-12 rounded-full bg-bgOffWhite border border-dustyRose/40 flex items-center justify-center mx-auto mb-4 text-dustyRoseDark">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                                <circle cx="12" cy="10" r="3" />
+                            </svg>
+                        </div>
+                        <h3 class="font-serif text-xl font-bold text-coffeeBrown mb-1">Espaço Jardim Encantado</h3>
+                        <p class="text-sm text-coffeeBrown/80 mb-4">
+                            Rua das Flores, 450 — Jardim Botânico<br>
+                            São Paulo - SP
+                        </p>
+                    </div>
+
+                    <!-- Botões Diretos de Rota -->
+                    <div class="flex gap-2 w-full mt-2 z-10">
+                        <a href="https://maps.google.com/?q=Jardim+Botanico+Sao+Paulo" target="_blank"
+                            rel="noopener noreferrer"
+                            class="flex-1 bg-bgOffWhite hover:bg-dustyRose hover:text-white text-coffeeBrown border border-dustyRose/50 text-xs font-medium py-2.5 px-3 rounded-xl transition-colors flex items-center justify-center gap-1.5">
+                            <span>Google Maps</span>
+                        </a>
+                        <a href="https://waze.com/ul?q=Jardim+Botanico+Sao+Paulo" target="_blank"
+                            rel="noopener noreferrer"
+                            class="flex-1 bg-bgOffWhite hover:bg-dustyRose hover:text-white text-coffeeBrown border border-dustyRose/50 text-xs font-medium py-2.5 px-3 rounded-xl transition-colors flex items-center justify-center gap-1.5">
+                            <span>Abrir Waze</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. LISTA DE PRESENTES, GUIA DE FRALDAS & PIX -->
+    <section id="presentes" class="py-12 px-4">
+        <div class="max-w-3xl mx-auto">
+            <div class="text-center mb-8">
+                <span class="text-xs uppercase tracking-[0.2em] text-oliveGreen font-semibold">Mimos para a Stela</span>
+                <h2 class="font-serif text-3xl font-bold text-coffeeBrown mt-1">Sugestões & PIX</h2>
+                <p class="text-sm text-coffeeBrown/80 max-w-lg mx-auto mt-2">
+                    Sua presença é o nosso maior presente! Mas, se desejar mimar a Stela, preparamos algumas sugestões
+                    práticas:
+                </p>
+            </div>
+
+            <!-- Guia de Fraldas (Sem necessidade de banco de dados) -->
+            <div class="stitched-card p-6 sm:p-8 mb-6">
+                <h3
+                    class="font-serif text-xl font-bold text-coffeeBrown text-center mb-4 flex items-center justify-center gap-2">
+                    <span class="text-oliveGreen">🌿</span> Guia de Fraldas & Cuidados <span
+                        class="text-oliveGreen">🌿</span>
+                </h3>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-center">
+                    <div class="bg-bgOffWhite/90 rounded-2xl p-4 border border-dustyRose/30">
+                        <span
+                            class="inline-block bg-dustyRose/20 text-coffeeBrown font-bold text-xs px-3 py-1 rounded-full mb-2">Tamanho
+                            P</span>
+                        <p class="text-xs text-coffeeBrown/90 font-medium">1 Pacote de Fraldas</p>
+                        <p class="text-[11px] text-coffeeBrown/70 mt-1">+ Lenço umedecido sem fragrância</p>
+                    </div>
+                    <div class="bg-bgOffWhite/90 rounded-2xl p-4 border-2 border-dustyRose relative">
+                        <span
+                            class="absolute -top-2.5 left-1/2 -translate-x-1/2 bg-dustyRose text-white text-[10px] uppercase tracking-wider px-2.5 py-0.5 rounded-full">Mais
+                            pedido</span>
+                        <span
+                            class="inline-block bg-dustyRose/20 text-coffeeBrown font-bold text-xs px-3 py-1 rounded-full mb-2 mt-1">Tamanho
+                            M</span>
+                        <p class="text-xs text-coffeeBrown/90 font-medium">1 Pacote de Fraldas</p>
+                        <p class="text-[11px] text-coffeeBrown/70 mt-1">+ Pomada para assaduras</p>
+                    </div>
+                    <div class="bg-bgOffWhite/90 rounded-2xl p-4 border border-dustyRose/30">
+                        <span
+                            class="inline-block bg-dustyRose/20 text-coffeeBrown font-bold text-xs px-3 py-1 rounded-full mb-2">Tamanho
+                            G</span>
+                        <p class="text-xs text-coffeeBrown/90 font-medium">1 Pacote de Fraldas</p>
+                        <p class="text-[11px] text-coffeeBrown/70 mt-1">+ Sabonete líquido neutro</p>
+                    </div>
+                </div>
+                <p class="text-[11px] text-center text-coffeeBrown/70 mt-4">
+                    * Sugestão de marcas que costumamos gostar: Pampers Confort Sec, Huggies Supreme Care ou Granado.
+                </p>
+            </div>
+
+            <!-- Bloco PIX Copia e Cola + Lojas Externas -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                <!-- Card PIX -->
+                <div class="stitched-card p-6 sm:p-7 text-center flex flex-col items-center justify-between">
+                    <div>
+                        <span class="text-xs uppercase tracking-wider text-oliveGreen font-semibold">Praticidade</span>
+                        <h3 class="font-serif text-xl font-bold text-coffeeBrown mt-1 mb-2">Operação Fralda via PIX</h3>
+                        <p class="text-xs text-coffeeBrown/80 mb-4">
+                            Prefere contribuir com qualquer valor para o enxoval? Escaneie o QR Code ou copie a chave
+                            abaixo:
+                        </p>
+
+                        <!-- QR Code Ilustrativo Estático -->
+                        <div
+                            class="w-32 h-32 mx-auto bg-white p-2.5 rounded-2xl border border-dustyRose/40 shadow-inner mb-4 flex items-center justify-center">
+                            <svg class="w-full h-full text-coffeeBrown" viewBox="0 0 100 100" fill="currentColor">
+                                <rect x="10" y="10" width="25" height="25" rx="3" fill="none" stroke="currentColor"
+                                    stroke-width="5" />
+                                <rect x="17" y="17" width="11" height="11" />
+                                <rect x="65" y="10" width="25" height="25" rx="3" fill="none" stroke="currentColor"
+                                    stroke-width="5" />
+                                <rect x="72" y="17" width="11" height="11" />
+                                <rect x="10" y="65" width="25" height="25" rx="3" fill="none" stroke="currentColor"
+                                    stroke-width="5" />
+                                <rect x="17" y="72" width="11" height="11" />
+                                <rect x="45" y="12" width="8" height="8" />
+                                <rect x="45" y="28" width="8" height="16" />
+                                <rect x="12" y="45" width="16" height="8" />
+                                <rect x="36" y="45" width="8" height="8" />
+                                <rect x="52" y="45" width="16" height="8" />
+                                <rect x="76" y="45" width="12" height="8" />
+                                <rect x="45" y="62" width="8" height="14" />
+                                <rect x="62" y="62" width="14" height="8" />
+                                <rect x="82" y="62" width="8" height="26" />
+                                <rect x="60" y="80" width="16" height="8" />
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div class="w-full z-10">
+                        <div class="bg-bgOffWhite border border-dustyRose/40 rounded-xl px-3 py-2 text-xs font-mono text-coffeeBrown truncate mb-2.5"
+                            id="pix-key-text">
+                            chabebe.stela@exemplo.com.br
+                        </div>
+                        <button type="button" onclick="copiarChavePix()" id="btn-copy-pix"
+                            class="w-full bg-dustyRose hover:bg-dustyRoseDark text-white font-medium text-sm py-3 px-4 rounded-xl shadow-sm transition-all flex items-center justify-center gap-2 cursor-pointer">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+                            </svg>
+                            <span id="btn-copy-label">Copiar Chave PIX</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Card Listas Externas -->
+                <div class="stitched-card p-6 sm:p-7 text-center flex flex-col items-center justify-between">
+                    <div>
+                        <span class="text-xs uppercase tracking-wider text-oliveGreen font-semibold">Lojas
+                            Parceiras</span>
+                        <h3 class="font-serif text-xl font-bold text-coffeeBrown mt-1 mb-2">Listas de Presentes</h3>
+                        <p class="text-xs text-coffeeBrown/80 mb-5">
+                            Também deixamos algumas opções selecionadas com muito carinho nas lojas abaixo:
+                        </p>
+                    </div>
+
+                    <div class="w-full space-y-3 z-10 my-auto">
+                        <a href="https://www.amazon.com.br/baby-reg" target="_blank" rel="noopener noreferrer"
+                            class="block w-full bg-bgOffWhite hover:bg-dustyRose hover:text-white text-coffeeBrown border border-dustyRose/50 font-medium text-sm py-3.5 px-4 rounded-xl transition-all">
+                            🎁 Lista na Amazon Baby
+                        </a>
+                        <a href="https://www.magazineluiza.com.br" target="_blank" rel="noopener noreferrer"
+                            class="block w-full bg-bgOffWhite hover:bg-dustyRose hover:text-white text-coffeeBrown border border-dustyRose/50 font-medium text-sm py-3.5 px-4 rounded-xl transition-all">
+                            🧸 Lista no Magalu
+                        </a>
+                    </div>
+
+                    <p class="text-[11px] text-coffeeBrown/70 mt-4">
+                        Os links abrem diretamente nas lojas oficiais.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. CONFIRMAÇÃO DE PRESENÇA (RSVP VIA WHATSAPP - SEM BANCO) -->
+    <section id="rsvp" class="py-12 px-4 mb-10">
+        <div class="max-w-xl mx-auto stitched-card p-7 sm:p-10">
+            <div class="text-center mb-6">
+                <span class="text-xs uppercase tracking-[0.2em] text-oliveGreen font-semibold">RSVP</span>
+                <h2 class="font-serif text-3xl font-bold text-coffeeBrown mt-1">Confirme sua Presença</h2>
+                <p class="text-xs sm:text-sm text-coffeeBrown/80 mt-2">
+                    Preencha os dados abaixo para enviar sua confirmação diretamente no WhatsApp da mamãe!
+                </p>
+            </div>
+
+            <form onsubmit="gerarConfirmacaoWhatsApp(event)" class="space-y-4 relative z-10">
+                <div>
+                    <label for="rsvp-nome"
+                        class="block text-xs font-semibold uppercase tracking-wider text-coffeeBrown mb-1.5">
+                        Seu Nome Completo *
+                    </label>
+                    <input type="text" id="rsvp-nome" required placeholder="Ex: Ana Paula Silva"
+                        class="w-full bg-bgOffWhite border border-dustyRose/50 rounded-xl px-4 py-3 text-sm text-coffeeBrown placeholder:text-coffeeBrown/40 focus:outline-none focus:border-dustyRoseDark focus:ring-2 focus:ring-dustyRose/20">
+                </div>
+
+                <div>
+                    <label for="rsvp-acompanhantes"
+                        class="block text-xs font-semibold uppercase tracking-wider text-coffeeBrown mb-1.5">
+                        Quantidade de Acompanhantes
+                    </label>
+                    <select id="rsvp-acompanhantes"
+                        class="w-full bg-bgOffWhite border border-dustyRose/50 rounded-xl px-4 py-3 text-sm text-coffeeBrown focus:outline-none focus:border-dustyRoseDark focus:ring-2 focus:ring-dustyRose/20">
+                        <option value="Vou sozinho(a)">Vou sozinho(a)</option>
+                        <option value="+ 1 acompanhante">+ 1 acompanhante</option>
+                        <option value="+ 2 acompanhantes">+ 2 acompanhantes</option>
+                        <option value="+ 3 acompanhantes">+ 3 acompanhantes</option>
+                        <option value="+ 4 acompanhantes">+ 4 acompanhantes</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="rsvp-obs"
+                        class="block text-xs font-semibold uppercase tracking-wider text-coffeeBrown mb-1.5">
+                        Recadinho ou Restrição Alimentar (Opcional)
+                    </label>
+                    <textarea id="rsvp-obs" rows="2"
+                        placeholder="Deixe um carinho para a Stela ou avise se possui alguma restrição..."
+                        class="w-full bg-bgOffWhite border border-dustyRose/50 rounded-xl px-4 py-3 text-sm text-coffeeBrown placeholder:text-coffeeBrown/40 focus:outline-none focus:border-dustyRoseDark focus:ring-2 focus:ring-dustyRose/20"></textarea>
+                </div>
+
+                <button type="submit"
+                    class="w-full bg-dustyRose hover:bg-dustyRoseDark text-white font-semibold py-3.5 px-6 rounded-full shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer mt-2">
+                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                        <path
+                            d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824z" />
+                    </svg>
+                    <span>Confirmar pelo WhatsApp</span>
+                </button>
+            </form>
+
+            <!-- Preview da Mensagem Gerada (Feedback do Protótipo) -->
+            <div id="whatsapp-preview-box"
+                class="hidden mt-6 bg-bgOffWhite border border-oliveGreen/40 rounded-2xl p-4 relative z-10">
+                <div class="flex items-center justify-between mb-2">
+                    <span class="text-xs font-bold text-oliveGreen uppercase tracking-wider">✓ Link do WhatsApp
+                        Gerado!</span>
+                    <button type="button"
+                        onclick="document.getElementById('whatsapp-preview-box').classList.add('hidden')"
+                        class="text-xs text-coffeeBrown/60 hover:text-coffeeBrown">Fechar</button>
+                </div>
+                <p class="text-xs text-coffeeBrown/80 mb-2">No celular/desktop do convidado, o WhatsApp abrirá com o
+                    seguinte texto pronto para envio:</p>
+                <pre id="whatsapp-message-preview"
+                    class="bg-white p-3 rounded-xl text-xs text-coffeeBrown whitespace-pre-wrap font-sans border border-dustyRose/30 mb-3"></pre>
+                <a id="whatsapp-direct-link" href="#" target="_blank" rel="noopener noreferrer"
+                    class="inline-block w-full text-center bg-oliveGreen hover:opacity-90 text-white text-xs font-medium py-2.5 px-4 rounded-xl transition-opacity">
+                    Abrir WhatsApp Agora ↗
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-warmSand border-t border-dustyRose/30 py-8 px-4 text-center">
+        <div class="max-w-xl mx-auto">
+            <p class="font-script text-4xl text-dustyRoseDark mb-1">Chá de Bebê da Stela</p>
+            <p class="text-xs text-coffeeBrown/70">Feito com muito amor para celebrar a nossa princesa ♥</p>
+        </div>
+    </footer>
+
+    <!-- Toast de Notificação (Substitui qualquer alert) -->
+    <div id="toast"
+        class="fixed bottom-5 left-1/2 -translate-x-1/2 z-50 bg-coffeeBrown text-bgOffWhite text-xs sm:text-sm font-medium px-5 py-3 rounded-full shadow-lg opacity-0 pointer-events-none transition-all duration-300 flex items-center gap-2">
+        <span class="text-dustyRose">♥</span>
+        <span id="toast-message">Chave PIX copiada!</span>
+    </div>
+
+    <script>
+        // 1. Configuração da Contagem Regressiva (30 dias a partir de hoje para o protótipo)
+        const targetDate = new Date();
+        targetDate.setDate(targetDate.getDate() + 30);
+        targetDate.setHours(15, 0, 0, 0);
+
+        // Atualiza a data exibida no card "Onde e Quando" dinamicamente
+        const opcoesData = { weekday: 'long', day: 'numeric', month: 'long' };
+        const dataFormatada = targetDate.toLocaleDateString('pt-BR', opcoesData);
+        document.getElementById('event-date-display').textContent =
+            dataFormatada.charAt(0).toUpperCase() + dataFormatada.slice(1);
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = targetDate.getTime() - now;
+
+            if (distance < 0) return;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('cd-days').textContent = String(days).padStart(2, '0');
+            document.getElementById('cd-hours').textContent = String(hours).padStart(2, '0');
+            document.getElementById('cd-minutes').textContent = String(minutes).padStart(2, '0');
+            document.getElementById('cd-seconds').textContent = String(seconds).padStart(2, '0');
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // 2. Função de Toast Visual
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-message').textContent = msg;
+            toast.classList.remove('opacity-0', 'translate-y-2');
+            toast.classList.add('opacity-100', 'translate-y-0');
+
+            setTimeout(() => {
+                toast.classList.remove('opacity-100', 'translate-y-0');
+                toast.classList.add('opacity-0', 'translate-y-2');
+            }, 3000);
+        }
+
+        // 3. Copiar Chave PIX (Stateless via Clipboard / Fallback)
+        function copiarChavePix() {
+            const pixKey = document.getElementById('pix-key-text').textContent.trim();
+            const btnLabel = document.getElementById('btn-copy-label');
+
+            // Cria input temporário para compatibilidade máxima com iframes e dispositivos móveis
+            const tempInput = document.createElement('input');
+            tempInput.value = pixKey;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            tempInput.setSelectionRange(0, 99999);
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+
+            btnLabel.textContent = 'Chave Copiada! ✓';
+            showToast('Chave PIX copiada para a área de transferência!');
+
+            setTimeout(() => {
+                btnLabel.textContent = 'Copiar Chave PIX';
+            }, 3000);
+        }
+
+        // 4. Gerar Link de Confirmação RSVP via WhatsApp (Sem Backend)
+        function gerarConfirmacaoWhatsApp(event) {
+            event.preventDefault();
+
+            // Número fictício de exemplo para o protótipo (substituir pelo da mamãe)
+            const telefoneOrganizador = "5511999999999";
+
+            const nome = document.getElementById('rsvp-nome').value.trim();
+            const acompanhantes = document.getElementById('rsvp-acompanhantes').value;
+            const obs = document.getElementById('rsvp-obs').value.trim();
+
+            let mensagem = `Olá! Gostaria de confirmar minha presença no *Chá de Bebê da Stela*! 🧸🎀\n\n`;
+            mensagem += `*Nome:* ${nome}\n`;
+            mensagem += `*Presença:* ${acompanhantes}\n`;
+
+            if (obs) {
+                mensagem += `*Recado / Obs:* ${obs}\n`;
+            }
+
+            const whatsappUrl = `https://wa.me/${telefoneOrganizador}?text=${encodeURIComponent(mensagem)}`;
+
+            // Exibe a pré-visualização na tela para validação do protótipo
+            document.getElementById('whatsapp-message-preview').textContent = mensagem;
+            document.getElementById('whatsapp-direct-link').href = whatsappUrl;
+            document.getElementById('whatsapp-preview-box').classList.remove('hidden');
+
+            showToast('Mensagem de confirmação preparada!');
+        }
+    </script>
+</body>
+
+</html>
