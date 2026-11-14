@@ -44,6 +44,7 @@ export interface EventInfoConfig {
   dateDisplay: string;
   timeDisplay: string;
   dressCode?: string;
+  dressCodeImage?: string; // Caminho para imagem de traje sugerido (ex: /dress-code.jpeg)
   locationName: string;
   address: string;
   googleMapsUrl?: string;
@@ -75,10 +76,25 @@ export interface ExternalGiftList {
   url: string;
 }
 
+export interface GiftCategory {
+  category: string;
+  icon?: string;
+  items: string[];
+}
+
 export interface GiftsConfig {
   subtitle?: string;
   title?: string;
   description?: string;
+  // Estrutura de lista de mimos e fraldas
+  mainItem?: {
+    title: string;
+    quotas?: string[];
+  };
+  mimosCategories?: GiftCategory[];
+  notes?: string;
+  byobNotice?: string;
+  // Campos legados para retrocompatibilidade
   diaperGuide?: DiaperGuideConfig;
   pix?: PixConfig;
   externalLists?: ExternalGiftList[];
@@ -89,6 +105,8 @@ export interface RsvpConfig {
   title?: string;
   description?: string;
   whatsappNumber: string;
+  deadline?: string; // Data limite no formato ISO (ex: "2026-12-10T23:59:59")
+  deadlineDisplay?: string; // Texto formatado (ex: "10 de Dezembro")
   companionOptions?: string[];
   defaultMessagePrefix?: string;
 }
@@ -101,6 +119,7 @@ export interface FooterConfig {
 export interface LandingConfig {
   slug: string;
   templateId: "baby-shower-boho" | string;
+  musicUrl?: string; // Caminho para música de fundo (ex: /music.mp3)
   seo: SeoConfig;
   theme: ThemeConfig;
   hero: HeroConfig;
@@ -110,4 +129,3 @@ export interface LandingConfig {
   rsvp: RsvpConfig;
   footer?: FooterConfig;
 }
-

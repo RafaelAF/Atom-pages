@@ -1,9 +1,11 @@
 {
   "slug": "stela",
   "templateId": "baby-shower-boho",
+  "musicUrl": "/recording-03_13.mp3",
   "seo": {
     "title": "Chá de Bebê da Stela ♥",
-    "description": "Você é nosso convidado especial para celebrar a doce espera da Stela!"
+    "description": "Você é nosso convidado especial para celebrar a doce espera da Stela!",
+    "ogImage": ""
   },
   "theme": {
     "colors": {
@@ -21,11 +23,11 @@
     "badgeSubtitle": "Chá de Bebê",
     "title": "Stela",
     "badgeFooter": "com muito amor",
-    "countdownTarget": "2026-12-12T15:00:00",
+    "countdownTarget": "2027-01-23T15:00:00",
     "countdownLabel": "Contagem regressiva para o grande dia",
     "quickLinks": {
       "rsvpLabel": "Confirmar Presença",
-      "giftsLabel": "Lista & PIX"
+      "giftsLabel": "Mimos & Fraldas"
     }
   },
   "story": {
@@ -40,9 +42,9 @@
   "event": {
     "subtitle": "Programe-se",
     "title": "Onde e Quando",
-    "dateDisplay": "Sábado, 12 de Dezembro",
-    "timeDisplay": "Das 15h00 às 19h00",
-    "dressCode": "Casual Confortável (Tons claros ou pastéis combinam com o tema!)",
+    "dateDisplay": "Sábado, 23 de Janeiro de 2027",
+    "timeDisplay": "às 15:00",
+    "dressCodeImage": "/dress-code.jpeg",
     "locationName": "Espaço Jardim Encantado",
     "address": "Rua das Flores, 450 — Jardim Botânico\nSão Paulo - SP",
     "googleMapsUrl": "https://maps.google.com/?q=Jardim+Botanico+Sao+Paulo",
@@ -50,54 +52,77 @@
   },
   "gifts": {
     "subtitle": "Mimos para a Stela",
-    "title": "Sugestões & PIX",
-    "description": "Sua presença é o nosso maior presente! Mas, se desejar mimar a Stela, preparamos algumas sugestões práticas:",
-    "diaperGuide": {
-      "title": "Guia de Fraldas & Cuidados",
-      "items": [
-        {
-          "size": "P",
-          "quantity": "1 Pacote de Fraldas",
-          "extra": "+ Lenço umedecido sem fragrância",
-          "isHighlight": false
-        },
-        {
-          "size": "M",
-          "quantity": "1 Pacote de Fraldas",
-          "extra": "+ Pomada para assaduras",
-          "isHighlight": true
-        },
-        {
-          "size": "G",
-          "quantity": "1 Pacote de Fraldas",
-          "extra": "+ Sabonete líquido neutro",
-          "isHighlight": false
-        }
-      ],
-      "brandsNote": "* Sugestão de marcas que costumamos gostar: Pampers Confort Sec, Huggies Supreme Care ou Granado."
+    "title": "Sugestões de Presentes",
+    "description": "Para ajudar a preparar a chegada da nossa pequena, cada convidado deverá escolher um tamanho de fralda (M ou G) e acrescentar um mimo de sua preferência.",
+    "mainItem": {
+      "title": "Fralda – Item Principal",
+      "quotas": [
+        "20 pacotes de fralda M",
+        "20 pacotes de fralda G"
+      ]
     },
-    "pix": {
-      "title": "Operação Fralda via PIX",
-      "description": "Prefere contribuir com qualquer valor para o enxoval? Escaneie o QR Code ou copie a chave abaixo:",
-      "key": "chabebe.stela@exemplo.com.br",
-      "keyType": "email"
-    },
-    "externalLists": [
+    "mimosCategories": [
       {
-        "name": "🎁 Lista na Amazon Baby",
-        "url": "https://www.amazon.com.br/baby-reg"
+        "category": "Higiene e cuidados",
+        "icon": "🧴",
+        "items": [
+          "Pomada para assadura",
+          "Lenços umedecidos",
+          "Sabonete líquido infantil",
+          "Shampoo infantil",
+          "Algodão",
+          "Hidratante infantil"
+        ]
       },
       {
-        "name": "🧸 Lista no Magalu",
-        "url": "https://www.magazineluiza.com.br"
+        "category": "Banho e enxoval",
+        "icon": "🛁",
+        "items": [
+          "Toalha de banho com capuz",
+          "Fraldas de pano",
+          "Cueiros",
+          "Mantas",
+          "Toalhinhas de boca",
+          "Babadores",
+          "Paninhos de ombro",
+          "Trocador portátil"
+        ]
+      },
+      {
+        "category": "Acessórios e cuidados pessoais",
+        "icon": "🪮",
+        "items": [
+          "Escovinha e pente infantil",
+          "Cortador de unhas",
+          "Termômetro digital",
+          "Aspirador nasal",
+          "Kit higiene",
+          "Necessaire infantil"
+        ]
+      },
+      {
+        "category": "Roupinhas e outros mimos",
+        "icon": "👗",
+        "items": [
+          "Bodies",
+          "Macacões",
+          "Meias",
+          "Touquinhas",
+          "Luvas",
+          "Organizador de produtos"
+        ]
       }
-    ]
+    ],
+    "notes": "O importante é celebrar a chegada da Stela com muito amor e carinho!",
+    "byobNotice": "Para quem desejar consumir bebidas alcoólicas durante a comemoração, pedimos a gentileza de trazer a sua própria bebida. 🍸"
   },
   "rsvp": {
     "subtitle": "RSVP",
     "title": "Confirme sua Presença",
     "description": "Preencha os dados abaixo para enviar sua confirmação diretamente no WhatsApp da mamãe!",
     "whatsappNumber": "5511999999999",
+    "deadline": "2027-01-23T15:00:00",
+    "deadlineDisplay": "23 de Janeiro de 2027 às 15:00",
     "companionOptions": [
       "Vou sozinho(a)",
       "+ 1 acompanhante",

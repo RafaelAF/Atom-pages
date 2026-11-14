@@ -4,9 +4,15 @@ interface NavbarProps {
   title: string;
   hasStory?: boolean;
   hasGifts?: boolean;
+  hasDressCode?: boolean;
 }
 
-export function Navbar({ title, hasStory = true, hasGifts = true }: NavbarProps) {
+export function Navbar({
+  title,
+  hasStory = true,
+  hasGifts = true,
+  hasDressCode = false,
+}: NavbarProps) {
   return (
     <header className="sticky top-0 z-40 bg-bg/90 backdrop-blur-md border-b border-primary/20">
       <nav className="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between">
@@ -25,9 +31,17 @@ export function Navbar({ title, hasStory = true, hasGifts = true }: NavbarProps)
           <a href="#evento" className="hover:text-primary transition-colors py-1">
             O Evento
           </a>
+          {hasDressCode && (
+            <a
+              href="#traje"
+              className="hidden sm:inline-block hover:text-primary transition-colors py-1"
+            >
+              Traje
+            </a>
+          )}
           {hasGifts && (
             <a href="#presentes" className="hover:text-primary transition-colors py-1">
-              Presentes & PIX
+              Mimos & Fraldas
             </a>
           )}
           <a

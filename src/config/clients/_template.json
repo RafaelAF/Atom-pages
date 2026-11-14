@@ -1,9 +1,11 @@
 {
   "slug": "novo-cliente",
   "templateId": "baby-shower-boho",
+  "musicUrl": "/music.mp3",
   "seo": {
     "title": "Chá de Bebê - [Nome] ♥",
-    "description": "Você é nosso convidado especial para celebrar este momento!"
+    "description": "Você é nosso convidado especial para celebrar este momento!",
+    "ogImage": ""
   },
   "theme": {
     "colors": {
@@ -25,7 +27,7 @@
     "countdownLabel": "Contagem regressiva para o grande dia",
     "quickLinks": {
       "rsvpLabel": "Confirmar Presença",
-      "giftsLabel": "Lista & PIX"
+      "giftsLabel": "Mimos & Fraldas"
     }
   },
   "story": {
@@ -42,58 +44,53 @@
     "title": "Onde e Quando",
     "dateDisplay": "Sábado, 31 de Dezembro",
     "timeDisplay": "Das 15h00 às 19h00",
-    "dressCode": "Casual Confortável",
+    "dressCodeImage": "/dress-code.jpeg",
     "locationName": "Nome do Local",
     "address": "Endereço Completo, 123 — Bairro\nCidade - UF",
     "googleMapsUrl": "https://maps.google.com/?q=Local",
     "wazeUrl": "https://waze.com/ul?q=Local"
   },
   "gifts": {
-    "subtitle": "Sugestões de Presentes",
-    "title": "Sugestões & PIX",
-    "description": "Sua presença é o nosso maior presente! Se desejar nos presentear, preparamos algumas opções:",
-    "diaperGuide": {
-      "title": "Guia de Fraldas & Cuidados",
-      "items": [
-        {
-          "size": "P",
-          "quantity": "1 Pacote de Fraldas",
-          "extra": "+ Lenço umedecido",
-          "isHighlight": false
-        },
-        {
-          "size": "M",
-          "quantity": "1 Pacote de Fraldas",
-          "extra": "+ Pomada",
-          "isHighlight": true
-        },
-        {
-          "size": "G",
-          "quantity": "1 Pacote de Fraldas",
-          "extra": "+ Sabonete neutro",
-          "isHighlight": false
-        }
-      ],
-      "brandsNote": "* Sugestões de marcas: Pampers, Huggies ou Granado."
+    "subtitle": "Mimos para o Bebê",
+    "title": "Sugestões de Presentes",
+    "description": "Para ajudar nos preparativos, cada convidado poderá escolher um tamanho de fralda e acrescentar um mimo de sua preferência.",
+    "mainItem": {
+      "title": "Fralda – Item Principal",
+      "quotas": [
+        "Pacotes de fralda M",
+        "Pacotes de fralda G"
+      ]
     },
-    "pix": {
-      "title": "Operação Fralda via PIX",
-      "description": "Prefere presentear com qualquer valor? Escaneie ou copie a chave:",
-      "key": "seu-pix@exemplo.com.br",
-      "keyType": "email"
-    },
-    "externalLists": [
+    "mimosCategories": [
       {
-        "name": "🎁 Lista na Loja Online",
-        "url": "https://www.amazon.com.br"
+        "category": "Higiene e cuidados",
+        "icon": "🧴",
+        "items": [
+          "Pomada para assadura",
+          "Lenços umedecidos",
+          "Sabonete líquido infantil"
+        ]
+      },
+      {
+        "category": "Banho e enxoval",
+        "icon": "🛁",
+        "items": [
+          "Toalha de banho com capuz",
+          "Fraldas de pano",
+          "Cueiros"
+        ]
       }
-    ]
+    ],
+    "notes": "O importante é celebrar este momento especial conosco!",
+    "byobNotice": "Para quem desejar consumir bebidas alcoólicas, sinta-se à vontade para trazer a sua preferida."
   },
   "rsvp": {
     "subtitle": "RSVP",
     "title": "Confirme sua Presença",
     "description": "Preencha para enviar a confirmação no WhatsApp!",
     "whatsappNumber": "5511999999999",
+    "deadline": "2026-12-25T23:59:59",
+    "deadlineDisplay": "25 de Dezembro",
     "companionOptions": [
       "Vou sozinho(a)",
       "+ 1 acompanhante",
@@ -107,4 +104,3 @@
     "subtitle": "Feito com carinho para celebrar esse dia especial ♥"
   }
 }
-

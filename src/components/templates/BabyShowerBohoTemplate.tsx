@@ -1,12 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { LandingConfig } from "@/types/landing";
 import { Navbar } from "@/components/shared/Navbar";
 import { Countdown } from "@/components/shared/Countdown";
-import { PixCard } from "@/components/shared/PixCard";
 import { RsvpForm } from "@/components/shared/RsvpForm";
 import { Toast } from "@/components/shared/Toast";
+import { MusicPlayer } from "@/components/shared/MusicPlayer";
 
 interface TemplateProps {
   config: LandingConfig;
@@ -14,6 +14,8 @@ interface TemplateProps {
 
 export function BabyShowerBohoTemplate({ config }: TemplateProps) {
   const [toastMessage, setToastMessage] = useState<string | null>(null);
+  const [isDressCodeOpen, setIsDressCodeOpen] = useState(false);
+  const dressCodeImage = config.event.dressCodeImage;
 
   const showToast = (msg: string) => {
     setToastMessage(msg);
@@ -21,6 +23,23 @@ export function BabyShowerBohoTemplate({ config }: TemplateProps) {
       setToastMessage(null);
     }, 3500);
   };
+
+  useEffect(() => {
+    if (!isDressCodeOpen) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setIsDressCodeOpen(false);
+    };
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isDressCodeOpen]);
 
   const themeVariables = {
     "--color-primary": config.theme.colors.primary,
@@ -42,6 +61,7 @@ export function BabyShowerBohoTemplate({ config }: TemplateProps) {
         title={config.hero.title}
         hasStory={!!config.story}
         hasGifts={!!config.gifts}
+        hasDressCode={!!(config.event.dressCodeImage || config.event.dressCode)}
       />
 
       {/* 1. HERO SECTION */}
@@ -161,7 +181,7 @@ export function BabyShowerBohoTemplate({ config }: TemplateProps) {
               href="#presentes"
               className="flex-1 bg-surface hover:bg-primary/20 text-text border border-primary font-medium py-3.5 px-6 rounded-full transition-all flex items-center justify-center gap-2"
             >
-              <span>{config.hero.quickLinks?.giftsLabel || "Lista & PIX"}</span>
+              <span>{config.hero.quickLinks?.giftsLabel || "Mimos & Fraldas"}</span>
             </a>
           </div>
         </div>
@@ -229,17 +249,8 @@ export function BabyShowerBohoTemplate({ config }: TemplateProps) {
                 <p className="text-base font-semibold text-primaryDark mb-1">
                   {config.event.dateDisplay}
                 </p>
-                <p className="text-sm text-text/80 mb-4">{config.event.timeDisplay}</p>
+                <p className="text-sm text-text/80">{config.event.timeDisplay}</p>
               </div>
-
-              {config.event.dressCode && (
-                <div className="w-full pt-3 border-t border-primary/30">
-                  <span className="text-xs font-medium text-accent uppercase tracking-wider">
-                    Traje Sugerido:
-                  </span>
-                  <p className="text-xs text-text/80 mt-0.5">{config.event.dressCode}</p>
-                </div>
-              )}
             </div>
 
             {/* Card Localização */}
@@ -287,110 +298,170 @@ export function BabyShowerBohoTemplate({ config }: TemplateProps) {
         </div>
       </section>
 
-      {/* 4. LISTA DE PRESENTES, GUIA DE FRALDAS & PIX */}
+      {/* 4. TRAJE SUGERIDO (DRESS CODE COM IMAGEM) */}
+      {(dressCodeImage || config.event.dressCode) && (
+        <section id="traje" className="pb-12 px-4">
+          <div className="text-center mb-6">
+            <span className="text-xs uppercase tracking-[0.2em] text-accent font-semibold">
+              Dress Code
+            </span>
+            <h2 className="font-serif text-3xl font-bold text-text mt-1">
+              Traje Sugerido
+            </h2>
+          </div>
+
+          <div className="stitched-card p-5 sm:p-8 text-center max-w-xl mx-auto">
+            {dressCodeImage ? (
+              <>
+                <button
+                  type="button"
+                  onClick={() => setIsDressCodeOpen(true)}
+                  aria-label="Ampliar a imagem do traje sugerido"
+                  className="group relative block w-full max-w-sm mx-auto rounded-2xl border-2 border-primary/40 bg-white p-2 shadow-sm transition-transform hover:scale-[1.01] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                >
+                  <img
+                    src={dressCodeImage}
+                    alt={`Traje sugerido para ${config.hero.title}`}
+                    className="w-full h-auto object-contain rounded-xl"
+                    loading="lazy"
+                  />
+                  <span className="absolute bottom-3 right-3 bg-bg/95 text-text text-[11px] font-medium px-3 py-1.5 rounded-full border border-primary/40 shadow-sm flex items-center gap-1">
+                    🔍 Ampliar
+                  </span>
+                </button>
+                <p className="text-[11px] text-text/60 mt-3">
+                  Toque na imagem para visualizar em tela cheia
+                </p>
+              </>
+            ) : (
+              <p className="text-sm text-text/80">{config.event.dressCode}</p>
+            )}
+
+            {dressCodeImage && config.event.dressCode && (
+              <p className="text-sm text-text/80 mt-4 leading-relaxed">
+                {config.event.dressCode}
+              </p>
+            )}
+          </div>
+        </section>
+      )}
+
+      {/* 5. LISTA DE PRESENTES & MIMOS (SEM PIX) */}
       {config.gifts && (
         <section id="presentes" className="py-12 px-4">
-          <div className="max-w-3xl mx-auto">
-            <div className="text-center mb-8">
-              <span className="text-xs uppercase tracking-[0.2em] text-accent font-semibold">
-                {config.gifts.subtitle || "Mimos"}
-              </span>
-              <h2 className="font-serif text-3xl font-bold text-text mt-1">
-                {config.gifts.title || "Sugestões & PIX"}
+          <div className="max-w-3xl mx-auto space-y-8">
+            {/* Cabeçalho da Seção */}
+            <div className="text-center">
+              <div className="flex items-center justify-center gap-2 text-sm text-primaryDark mb-1">
+                <span>🧸</span>
+                <span className="text-xs uppercase tracking-[0.2em] text-accent font-semibold">
+                  {config.gifts.subtitle || "Mimos para a Stela"}
+                </span>
+                <span>💗</span>
+              </div>
+              <h2 className="font-serif text-3xl font-bold text-text">
+                {config.gifts.title || "Sugestões de Presentes"}
               </h2>
               {config.gifts.description && (
-                <p className="text-sm text-text/80 max-w-lg mx-auto mt-2">
+                <p className="text-sm text-text/85 max-w-xl mx-auto mt-2 leading-relaxed">
                   {config.gifts.description}
                 </p>
               )}
             </div>
 
-            {/* Guia de Fraldas */}
-            {config.gifts.diaperGuide && (
-              <div className="stitched-card p-6 sm:p-8 mb-6">
-                <h3 className="font-serif text-xl font-bold text-text text-center mb-4 flex items-center justify-center gap-2">
-                  <span className="text-accent">🌿</span>
-                  {config.gifts.diaperGuide.title || "Guia de Fraldas & Cuidados"}
-                  <span className="text-accent">🌿</span>
+            {/* 1. Item Principal: Fraldas (M e G) */}
+            {config.gifts.mainItem && (
+              <div className="stitched-card p-6 sm:p-8 text-center">
+                <h3 className="font-serif text-2xl font-bold text-text mb-2 flex items-center justify-center gap-2">
+                  <span>🎀</span>
+                  <span>{config.gifts.mainItem.title}</span>
+                  <span>🎀</span>
                 </h3>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-center">
-                  {config.gifts.diaperGuide.items.map((item, idx) => (
+                <p className="text-xs text-text/80 mb-6">
+                  Cada convidado deverá escolher um tamanho de fralda (M ou G) e acrescentar um mimo de sua preferência:
+                </p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-lg mx-auto">
+                  {config.gifts.mainItem.quotas?.map((quota, idx) => (
                     <div
                       key={idx}
-                      className={`bg-bg/90 rounded-2xl p-4 ${
-                        item.isHighlight
-                          ? "border-2 border-primary relative"
-                          : "border border-primary/30"
-                      }`}
+                      className="bg-bg/95 border-2 border-primary/50 rounded-2xl p-5 shadow-sm flex flex-col items-center justify-center transition-transform hover:scale-[1.02]"
                     >
-                      {item.isHighlight && (
-                        <span className="absolute -top-2.5 left-1/2 -translate-x-1/2 bg-primary text-white text-[10px] uppercase tracking-wider px-2.5 py-0.5 rounded-full">
-                          Mais pedido
-                        </span>
-                      )}
-                      <span className="inline-block bg-primary/20 text-text font-bold text-xs px-3 py-1 rounded-full mb-2 mt-1">
-                        Tamanho {item.size}
+                      <span className="text-3xl mb-2">👶</span>
+                      <span className="font-serif text-lg font-bold text-primaryDark">
+                        {quota}
                       </span>
-                      <p className="text-xs text-text/90 font-medium">
-                        {item.quantity}
-                      </p>
-                      <p className="text-[11px] text-text/70 mt-1">{item.extra}</p>
+                      <span className="text-[11px] uppercase tracking-wider text-accent font-medium mt-1">
+                        Item Principal
+                      </span>
                     </div>
                   ))}
                 </div>
-                {config.gifts.diaperGuide.brandsNote && (
-                  <p className="text-[11px] text-center text-text/70 mt-4">
-                    {config.gifts.diaperGuide.brandsNote}
-                  </p>
-                )}
               </div>
             )}
 
-            {/* Bloco PIX + Lojas Externas */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {config.gifts.pix && (
-                <PixCard pix={config.gifts.pix} onNotify={showToast} />
-              )}
-
-              {config.gifts.externalLists && config.gifts.externalLists.length > 0 && (
-                <div className="stitched-card p-6 sm:p-7 text-center flex flex-col items-center justify-between">
-                  <div>
-                    <span className="text-xs uppercase tracking-wider text-accent font-semibold">
-                      Lojas Parceiras
-                    </span>
-                    <h3 className="font-serif text-xl font-bold text-text mt-1 mb-2">
-                      Listas de Presentes
-                    </h3>
-                    <p className="text-xs text-text/80 mb-5">
-                      Também deixamos algumas opções selecionadas com muito carinho nas lojas abaixo:
-                    </p>
-                  </div>
-
-                  <div className="w-full space-y-3 z-10 my-auto">
-                    {config.gifts.externalLists.map((item, idx) => (
-                      <a
-                        key={idx}
-                        href={item.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="block w-full bg-bg hover:bg-primary hover:text-white text-text border border-primary/50 font-medium text-sm py-3.5 px-4 rounded-xl transition-all"
-                      >
-                        {item.name}
-                      </a>
-                    ))}
-                  </div>
-
-                  <p className="text-[11px] text-text/70 mt-4">
-                    Os links abrem diretamente nas lojas oficiais.
-                  </p>
+            {/* 2. Categorias de Mimos */}
+            {config.gifts.mimosCategories && config.gifts.mimosCategories.length > 0 && (
+              <div className="stitched-card p-6 sm:p-8">
+                <div className="text-center mb-6">
+                  <span className="text-xs uppercase tracking-[0.2em] text-accent font-semibold">
+                    Inspirações
+                  </span>
+                  <h3 className="font-serif text-2xl font-bold text-text mt-1">
+                    Sugestões de Mimos
+                  </h3>
                 </div>
-              )}
-            </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {config.gifts.mimosCategories.map((cat, idx) => (
+                    <div
+                      key={idx}
+                      className="bg-bg/90 border border-primary/30 rounded-2xl p-5 shadow-sm"
+                    >
+                      <div className="flex items-center gap-2 mb-3 pb-2 border-b border-primary/20">
+                        {cat.icon && <span className="text-xl">{cat.icon}</span>}
+                        <h4 className="font-serif text-base font-bold text-text">
+                          {cat.category}
+                        </h4>
+                      </div>
+                      <ul className="space-y-1.5 text-xs text-text/85">
+                        {cat.items.map((item, itemIdx) => (
+                          <li key={itemIdx} className="flex items-center gap-2">
+                            <span className="text-primary text-[10px]">♥</span>
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* 3. Mensagem de Carinho (Fralda é o pedido principal...) */}
+            {config.gifts.notes && (
+              <div className="bg-surface/90 border border-primary/50 rounded-2xl p-5 text-center max-w-2xl mx-auto shadow-sm">
+                <p className="text-xs sm:text-sm font-medium text-text leading-relaxed">
+                  💕 <strong className="text-primaryDark">A fralda é o nosso pedido principal, e o mimo fica a critério de cada convidado.</strong> {config.gifts.notes}
+                </p>
+              </div>
+            )}
+
+            {/* 4. Aviso Importante (BYOB) */}
+            {config.gifts.byobNotice && (
+              <div className="bg-bg border-2 border-primary/40 rounded-2xl p-5 text-center max-w-xl mx-auto shadow-sm">
+                <div className="inline-block bg-primary/20 text-primaryDark text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-full mb-2">
+                  ⚠️ ATENÇÃO! 🍸
+                </div>
+                <p className="text-xs sm:text-sm text-text/90 leading-relaxed font-medium">
+                  {config.gifts.byobNotice}
+                </p>
+              </div>
+            )}
           </div>
         </section>
       )}
 
-      {/* 5. CONFIRMAÇÃO DE PRESENÇA (RSVP VIA WHATSAPP) */}
+      {/* 6. CONFIRMAÇÃO DE PRESENÇA (RSVP VIA WHATSAPP COM DATA LIMITE) */}
       <section id="rsvp" className="py-12 px-4 mb-10">
         <RsvpForm
           rsvp={config.rsvp}
@@ -411,9 +482,37 @@ export function BabyShowerBohoTemplate({ config }: TemplateProps) {
         </div>
       </footer>
 
+      {/* Lightbox do Traje Sugerido */}
+      {isDressCodeOpen && dressCodeImage && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label="Imagem do traje sugerido ampliada"
+          onClick={() => setIsDressCodeOpen(false)}
+          className="fixed inset-0 z-[60] flex items-center justify-center bg-text/85 backdrop-blur-sm p-4"
+        >
+          <button
+            type="button"
+            onClick={() => setIsDressCodeOpen(false)}
+            aria-label="Fechar imagem ampliada"
+            className="absolute top-4 right-4 w-10 h-10 rounded-full bg-bg text-text text-lg font-bold shadow-md flex items-center justify-center hover:bg-surface transition-colors"
+          >
+            ✕
+          </button>
+          <img
+            src={dressCodeImage}
+            alt={`Traje sugerido para ${config.hero.title} ampliado`}
+            onClick={(event) => event.stopPropagation()}
+            className="max-h-[90vh] max-w-full w-auto h-auto object-contain rounded-2xl bg-white p-2 shadow-2xl"
+          />
+        </div>
+      )}
+
       {/* Toast de Feedback */}
       <Toast message={toastMessage} />
+
+      {/* Música de Fundo com Mute / Unmute Fixo */}
+      <MusicPlayer musicUrl={config.musicUrl} />
     </div>
   );
 }
-
