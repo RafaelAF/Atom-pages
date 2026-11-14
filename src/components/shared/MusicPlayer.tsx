@@ -9,46 +9,54 @@ interface MusicPlayerProps {
 export function MusicPlayer({ musicUrl = "/recording-03_13.mp3" }: MusicPlayerProps) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [needsInteraction, setNeedsInteraction] = useState(false);
+  const [hasError, setHasError] = useState(false);
 
   useEffect(() => {
     const audio = audioRef.current;
     if (!audio) return;
+    const audioEl = audio;
 
-    audio.volume = 0.4; // Volume agradável de fundo
+    audioEl.volume = 0.4; // Volume agradável de fundo
 
-    const startPlay = () => {
-      audio
-        .play()
-        .then(() => {
-          setIsPlaying(true);
-        })
-        .catch(() => {
-          // Autoplay bloqueado pelo navegador até a primeira interação do usuário
-          const enableAudioOnInteraction = () => {
-            audio
-              .play()
-              .then(() => {
-                setIsPlaying(true);
-              })
-              .catch(() => { });
+    let cancelled = false;
 
-            window.removeEventListener("click", enableAudioOnInteraction);
-            window.removeEventListener("touchstart", enableAudioOnInteraction);
-            window.removeEventListener("scroll", enableAudioOnInteraction);
-          };
-
-          window.addEventListener("click", enableAudioOnInteraction, { once: true });
-          window.addEventListener("touchstart", enableAudioOnInteraction, { once: true });
-          window.addEventListener("scroll", enableAudioOnInteraction, { once: true });
-        });
+    const interactionEvents = ["pointerdown", "touchend", "keydown", "click"] as const;
+    const onInteraction = () => startPlayback();
+    const removeInteractionListeners = () => {
+      interactionEvents.forEach((eventName) =>
+        window.removeEventListener(eventName, onInteraction)
+      );
     };
 
-    startPlay();
-    setIsLoaded(true);
+    function startPlayback() {
+      audioEl
+        .play()
+        .then(() => {
+          if (cancelled) return;
+          setIsPlaying(true);
+          setNeedsInteraction(false);
+          removeInteractionListeners();
+        })
+        .catch(() => {
+          if (cancelled) return;
+          // Autoplay bloqueado pelo navegador: aguarda a primeira interação
+          setIsPlaying(false);
+          setNeedsInteraction(true);
+        });
+    }
+
+    interactionEvents.forEach((eventName) =>
+      window.addEventListener(eventName, onInteraction, { passive: true })
+    );
+
+    // Tenta tocar imediatamente ao acessar a página
+    startPlayback();
 
     return () => {
-      audio.pause();
+      cancelled = true;
+      removeInteractionListeners();
+      audioEl.pause();
     };
   }, [musicUrl]);
 
@@ -62,14 +70,41 @@ export function MusicPlayer({ musicUrl = "/recording-03_13.mp3" }: MusicPlayerPr
     } else {
       audio
         .play()
-        .then(() => setIsPlaying(true))
-        .catch((err) => console.warn("[MusicPlayer] Falha ao reproduzir áudio:", err));
+        .then(() => {
+          setIsPlaying(true);
+          setNeedsInteraction(false);
+        })
+        .catch((err) => {
+          console.warn("[MusicPlayer] Falha ao reproduzir áudio:", err);
+          setNeedsInteraction(true);
+        });
     }
   };
 
   return (
     <>
-      <audio ref={audioRef} src={musicUrl} loop preload="auto" />
+      <audio
+        ref={audioRef}
+        src={musicUrl}
+        loop
+        autoPlay
+        preload="auto"
+        onError={() => {
+          setHasError(true);
+          setNeedsInteraction(false);
+        }}
+      />
+
+      {/* Aviso quando o navegador bloqueia o autoplay */}
+      {needsInteraction && !isPlaying && !hasError && (
+        <button
+          type="button"
+          onClick={toggleSound}
+          className="fixed bottom-6 right-20 z-40 max-w-[190px] bg-surface text-text text-[11px] font-medium px-3.5 py-2 rounded-full border border-primary/50 shadow-lg leading-snug text-left hover:bg-bg transition-colors animate-pulse"
+        >
+          🎵 Toque para ativar a música
+        </button>
+      )}
 
       {/* Botão Flutuante Fixo para Mute / Unmute */}
       <div className="fixed bottom-6 right-6 z-40">
